@@ -23,9 +23,10 @@ chart.onUpdate(() => { // When price changes
   // Do something...
 });
 
-// Wait 5 seconds and set the market to EURONEXT:ASML
-console.log('\nSetting market to EURONEXT:ASML...');
-chart.setMarket('EURONEXT:ASML', {
+// Get market from command line argument or use default
+const market = process.argv[2] || 'EURONEXT:ASML';
+console.log(`\nSetting market to ${market}...`);
+chart.setMarket(market, {
     timeframe: 'D',
 });
     

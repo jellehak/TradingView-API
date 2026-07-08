@@ -5,7 +5,8 @@ const TradingView = require('../main');
  * as 'searchMarketV3' and 'searchIndicator'
  */
 
-TradingView.searchMarketV3('ASML').then((rs) => {
+const searchTerm = process.argv[2] || 'ASML';
+TradingView.searchMarketV3(searchTerm).then((rs) => {
   console.log('Found Markets:', rs);
 });
 
