@@ -5,10 +5,10 @@ const TradingView = require('../main');
  * as 'searchMarketV3' and 'searchIndicator'
  */
 
-TradingView.searchMarketV3('BINANCE:').then((rs) => {
+TradingView.searchMarketV3('ASML').then((rs) => {
   console.log('Found Markets:', rs);
 });
 
-TradingView.searchIndicator('RSI').then((rs) => {
-  console.log('Found Indicators:', rs);
-});
+// TradingView.searchIndicator('RSI').then((rs) => {
+//   console.log('Found Indicators:', rs);
+// });
