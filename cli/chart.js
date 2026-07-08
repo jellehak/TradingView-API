@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const TradingView = require('../main');
 
 /**
@@ -19,9 +21,28 @@ chart.onSymbolLoaded(() => { // When the symbol is successfully loaded
 
 chart.onUpdate(() => { // When price changes
   if (!chart.periods[0]) return;
-  console.log(`[${chart.infos.description}]: ${chart.periods[0].close} ${chart.infos.currency_id}`);
+//   console.log(JSON.stringify(chart.infos, null, 2));
+//   console.log(chart.periods);
+//   console.log(`[${chart.infos.description}]: ${chart.periods[0].close} ${chart.infos.currency_id}`);
   // Do something...
+  // Log periods info Pretty like time, open, high, low, close, volume, etc.
+//   console.log(chart.periods[0])
+  console.log(`[${chart.infos.description}]: ${renderPeriod(chart.periods[0])}`);
 });
+
+function renderPeriod(period) {
+     /**
+   * {
+  time: 1783517400,
+  open: 364.76,
+  close: 359.47,
+  max: 367.84,
+  min: 358.02,
+  volume: 12707919
+}
+   */
+  return `Time: ${new Date(period.time * 1000).toLocaleString()} | Open: ${period.open} | High: ${period.max} | Low: ${period.min} | Close: ${period.close} | Volume: ${period.volume}`;
+}
 
 // Get market from command line argument or use default
 const market = process.argv[2] || 'EURONEXT:ASML';

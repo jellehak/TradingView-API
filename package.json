@@ -3,6 +3,9 @@
   "version": "3.5.2",
   "description": "Tradingview instant stocks API, indicator alerts, trading bot, and more !",
   "main": "main.js",
+  "bin": {
+    "tradingview": "./cli/chart.js"
+  },
   "scripts": {
     "test": "vitest",
     "example": "node --env-file=.env",
