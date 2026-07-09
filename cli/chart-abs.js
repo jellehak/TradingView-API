@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const TradingView = require('../main');
-// import TradingView from '@mathieuc/tradingview';
 
 /**
  * This example creates a BTCEUR daily chart
@@ -36,18 +35,10 @@ chart.onUpdate(() => { // When price changes
   if (!chart.periods[0]) return;
   
   const close = chart.periods[0].close;
+  const direction = previousClose === null ? '→' : (close > previousClose ? `${colors.green}▲${colors.reset}` : close < previousClose ? `${colors.red}▼${colors.reset}` : '→');
+  const priceColor = previousClose === null ? colors.cyan : (close > previousClose ? colors.green : close < previousClose ? colors.red : colors.cyan);
   
-  if (previousClose === null) {
-    previousClose = close;
-    return;
-  }
-  
-  const delta = close - previousClose;
-  const deltaPercent = ((delta / previousClose) * 100).toFixed(2);
-  const direction = delta > 0 ? `${colors.green}▲${colors.reset}` : delta < 0 ? `${colors.red}▼${colors.reset}` : '→';
-  const priceColor = delta > 0 ? colors.green : delta < 0 ? colors.red : colors.cyan;
-  
-  console.log(`[${colors.bold}${chart.infos.description}${colors.reset}]: ${direction} ${priceColor}${delta > 0 ? '+' : ''}${delta.toFixed(2)}${colors.reset} (${priceColor}${deltaPercent > 0 ? '+' : ''}${deltaPercent}%${colors.reset}) @ ${close} ${chart.infos.currency_id}`);
+  console.log(`[${colors.bold}${chart.infos.description}${colors.reset}]: ${direction} ${priceColor}${close}${colors.reset} ${chart.infos.currency_id}`);
   
   previousClose = close;
 });
@@ -74,5 +65,6 @@ function renderPeriod(period) {
 const market = process.argv[2] || 'EURONEXT:ASML';
 console.log(`\nSetting market to ${market}...`);
 chart.setMarket(market, {
-    timeframe: '1',
-})
+    timeframe: 'D',
+});
+    
